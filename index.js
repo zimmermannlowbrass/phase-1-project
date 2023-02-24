@@ -1,0 +1,129 @@
+let choices = []
+let ready = false
+let correctChoices = []
+// let correctChoice = correctChoices[correctChoices.length - 2]
+
+//
+//ideas for cleaning this up is to make the 'check my city' a form
+//and then make the quiz just a button that populates the breweries
+//
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    let form = document.querySelector('form')
+    let select_difficulty = document.querySelector('select')
+    let difficulty 
+    select_difficulty.addEventListener('change', () => {
+        difficulty = select_difficulty.value
+        choices = gatherPossibleWrongChoices(difficulty)
+    })
+    let check = document.querySelector('#checker')
+    let submit = document.querySelector('#submitter')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let city = e.target['city'].value
+        let state = e.target['state'].value
+        
+        //need to check if any 'choices' are at the city //
+        
+        grabCorrectAnswerBrewery(city, state)
+        
+        let possible_breweries = document.querySelector('#possible_breweries')
+        possible_breweries.innerText = ''
+        
+        if (ready === true && e.submitter === submit) {
+            choices = suffleChoices(choices)
+            choices.forEach(choice => populatePossibleChoices(choice))
+        }
+        if (e.submitter === check) {
+            //make a way to check if city is true
+            ready = true
+            alert('This city works!')
+        }
+        choices = gatherPossibleWrongChoices(difficulty)
+    })
+})
+
+
+function gatherPossibleWrongChoices(difficulty) {
+    let choices = []
+    let i = 0
+    while(i < (difficulty-1)) {
+        let x = Math.floor(Math.random() * 8170)
+        fetch(`https://api.openbrewerydb.org/breweries?page=${x}&per_page=1`)
+        .then(resp => resp.json())
+        .then(data => choices.push(data[0]))
+        i++
+    }
+    return choices
+}
+
+function grabCorrectAnswerBrewery(city, state) {
+    //
+    fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}&by_city=${city}&per_page=50`)
+    .then(resp => resp.json())
+    .then(data => {
+        let len = data.length
+        console.log(len)
+        if (len === 50) {
+            fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}&by_city=${city}&page=2&per_page=50`)
+            .then(resp => resp.json())
+            .then(data => {
+                len += data.length
+                let x = Math.floor(Math.random() * len)
+                fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}&by_city=${city}&page=${x}&per_page=1`)
+                .then(resp => resp.json())
+                .then(data => {
+                    correctChoices.push(data[0])
+                    choices.push(data[0])})
+            })
+        } else {
+            let x = Math.floor(Math.random() * len)
+            fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}&by_city=${city}&page=${x}&per_page=1`)
+            .then(resp => resp.json())
+            .then(data => {
+                correctChoices.push(data[0])
+                choices.push(data[0])})
+        }   
+    })   
+}
+
+function suffleChoices(choices) {
+    for (let i = choices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = choices[i];
+        choices[i] = choices[j];
+        choices[j] = temp;
+        }
+    return choices
+}
+
+
+
+function populatePossibleChoices(choice) {
+    let name = choice.name
+    //need to add a click event listener as well as drag/drop feature!
+    let possible_breweries = document.querySelector('#possible_breweries')
+    let p = document.createElement('p')
+    p.className = 'choice'
+    p.innerText = name
+    p.addEventListener('click', () => {
+        if (name === correctChoices[correctChoices.length - 2].name) {
+            alert('YOU ARE A BEER SNOB!')
+        } else {
+            alert('try again :(')
+        }
+    })
+    possible_breweries.appendChild(p)
+
+
+}
+
+
+/////////////////////
+function checkForDuplicates(choice) {
+    if((city !== choice[0].city) && (state !== choice[0].state)) {
+        console.log('hi')
+    }
+}

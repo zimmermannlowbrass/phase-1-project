@@ -7,17 +7,18 @@
     <body>
         <div class="header">
             <h1 id="page_title">Brewery Snob Quiz</h1>
+            <h3 id="description">How well do you think you know the breweries in your hometown? Play and see!</h3>
         </div>
         <h4>First, please pick a difficulty!</h4>
         <select id="difficulty" name="select_difficulty" required>
             <option aria-placeholder="nothing"></option>
-            <option value=3>Easy (pick from 3)</option>
+            <option value=5>Easy (pick from 5)</option>
             <option value=10>Medium (pick from 10)</option>
             <option value=20>Hard (pick from 20)</option>
           </select>
         <br/>
         <form class="quiz_section">
-            <h4>Next, enter your city!</h4>
+            <h4>Next, enter your hometown!</h4>
             <input
             type="text"
             name="city"
@@ -41,6 +42,6 @@
         </form>
         <div id="possible_breweries" class="quiz_section"></div>
         <div id="learn_more_about_brewery" class="info_sction"></div>
-        <h2>Learn More About A Brewery by Dragging the Name Here!</h2>
+        <h2 class="info_section">Learn More About A Brewery by Dragging the Name Here!</h2>
         <script defer type="text/javascript" src="index.js"></script>
     </body>

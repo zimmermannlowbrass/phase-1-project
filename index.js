@@ -5,15 +5,14 @@ let difficulty
 let possible_breweries = document.querySelector('#possible_breweries')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
+let info_section = document.querySelector('#info_section')
 
 
 function resetAllChoices() {
     choices = []
     correctChoice = null
     correctChoices = []
-    possible_breweries.innerText = ''
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     select_difficulty.addEventListener('change', () => {
@@ -49,11 +48,7 @@ function gatherPossibleWrongChoices(difficulty) {
     }
 }
 
-
-
-
 function grabCorrectAnswerBrewery(city, state) {
-    //
     fetch(`https://api.openbrewerydb.org/breweries?by_type=micro&by_state=${state}&by_city=${city}&per_page=50`)
     .then(resp => resp.json())
     .then(data => {
@@ -74,9 +69,6 @@ function randomCorrectBrewery (correctChoices, len) {
     return correctChoices[0][x]
 }
 
-
-
-
 function shuffleAllPossibleChoices(choices) {
     for (let i = choices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -96,22 +88,19 @@ function populateAllPossibleChoices(choice) {
     let p = document.createElement('p')
     p.className = 'choice'
     p.innerText = name
-    p.addEventListener('click', () => {
-        if (name === correctChoice.name) {
-            alert('YOU ARE A BEER SNOB!')
-        } else {
-            alert('try again :(')
-        }
+    p.draggable = true
+
+    p.addEventListener('dragstart', (e) => {
+        console.log(e)
     })
+
+
+    // p.addEventListener('click', () => {
+    //     if (name === correctChoice.name) {
+    //         alert('YOU ARE A BEER SNOB!')
+    //     } else {
+    //         alert('try again :(')
+    //     }
+    // })
     possible_breweries.appendChild(p)
-
-
-}
-
-
-/////////////////////
-function checkForDuplicates(choice) {
-    if((city !== choice[0].city) && (state !== choice[0].state)) {
-        console.log('hi')
-    }
 }

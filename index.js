@@ -1,24 +1,42 @@
 let choices
-let ready = false
 let correctChoices
+let correctChoice
 let difficulty
-// let correctChoice = correctChoices[correctChoices.length - 2]
+let possible_breweries = document.querySelector('#possible_breweries')
+let select_difficulty = document.querySelector('select')
+let form = document.querySelector('form')
 
-//
-//ideas for cleaning this up is to make the 'check my city' a form
-//and then make the quiz just a button that populates the breweries
-//
+
+function resetAllChoices() {
+    choices = []
+    correctChoice = null
+    correctChoices = []
+    possible_breweries.innerText = ''
+}
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    let select_difficulty = document.querySelector('select')
     select_difficulty.addEventListener('change', () => {
+        resetAllChoices()
         difficulty = select_difficulty.value
         gatherPossibleWrongChoices(difficulty)
+        
+    })
+    form.addEventListener('submit', (e) => {
+        if (difficulty){
+            e.preventDefault()
+            possible_breweries.innerText = ''
+            let city = e.target['city'].value
+            let state = e.target['state'].value
+            grabCorrectAnswerBrewery(city, state)
+            form.reset()
+            select_difficulty.selectedIndex = 0
+            difficulty = null
+        } else {
+            alert('Pick a difficulty!')
+        }
     })
 })
-
-
 
 function gatherPossibleWrongChoices(difficulty) {
     let i = 0
@@ -34,35 +52,6 @@ function gatherPossibleWrongChoices(difficulty) {
 
 
 
-
-//CLEAN THIS UP//
-
-document.addEventListener('DOMContentLoaded', () => {
-    let form = document.querySelector('form')
-    correctChoices = []
-    choices = []
-    // let submit = document.querySelector('#submitter')
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
-        let city = e.target['city'].value
-        let state = e.target['state'].value
-        
-        grabCorrectAnswerBrewery(city, state)
-        
-        // let possible_breweries = document.querySelector('#possible_breweries')
-        // possible_breweries.innerText = ''
-        
-        // if (ready === true && e.submitter === submit) {
-        //     choices = suffleChoices(choices)
-        //     choices.forEach(choice => populatePossibleChoices(choice))
-        // }
-        // choices = gatherPossibleWrongChoices(difficulty)
-    })
-})
-
-
-
-
 function grabCorrectAnswerBrewery(city, state) {
     //
     fetch(`https://api.openbrewerydb.org/breweries?by_type=micro&by_state=${state}&by_city=${city}&per_page=50`)
@@ -73,29 +62,22 @@ function grabCorrectAnswerBrewery(city, state) {
             alert('There are no breweries in this city! Try again')
         }
         correctChoices.push(data)
-        let correctChoice = randomCorrectBrewery(correctChoices, len)
-        
-        
-
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     correctChoices.push(data[0])
-        //     choices.push(data[0])})
+        correctChoice = randomCorrectBrewery(correctChoices, len)
+        choices.push(correctChoice)
+        choices = shuffleAllPossibleChoices(choices)
+        choices.forEach(choice => populateAllPossibleChoices(choice))
         })   
     } 
 
 function randomCorrectBrewery (correctChoices, len) {
     let x = Math.floor(Math.random() * len)
-    console.log(correctChoices[0][x])
-    return correctChoices[x]
+    return correctChoices[0][x]
 }
 
 
 
 
-
-
-function suffleChoices(choices) {
+function shuffleAllPossibleChoices(choices) {
     for (let i = choices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = choices[i];
@@ -107,7 +89,7 @@ function suffleChoices(choices) {
 
 
 
-function populatePossibleChoices(choice) {
+function populateAllPossibleChoices(choice) {
     let name = choice.name
     //need to add a click event listener as well as drag/drop feature!
     let possible_breweries = document.querySelector('#possible_breweries')
@@ -115,7 +97,7 @@ function populatePossibleChoices(choice) {
     p.className = 'choice'
     p.innerText = name
     p.addEventListener('click', () => {
-        if (name === correctChoices[correctChoices.length - 2].name) {
+        if (name === correctChoice.name) {
             alert('YOU ARE A BEER SNOB!')
         } else {
             alert('try again :(')

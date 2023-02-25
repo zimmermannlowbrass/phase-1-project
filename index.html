@@ -9,7 +9,7 @@
             <h1 id="page_title">Brewery Snob Quiz</h1>
         </div>
         <h4>First, please pick a difficulty!</h4>
-        <select id="difficulty" name="select_difficulty">
+        <select id="difficulty" name="select_difficulty" required>
             <option aria-placeholder="nothing"></option>
             <option value=3>Easy (pick from 3)</option>
             <option value=10>Medium (pick from 10)</option>
@@ -22,11 +22,13 @@
             type="text"
             name="city"
             placeholder="City"
+            required
             />
             <input
             type="text"
             name="state"
             placeholder="State"
+            required
             />
             <br/>
             <h4>Finally, whenever you are ready, let the quiz begin!</h4>

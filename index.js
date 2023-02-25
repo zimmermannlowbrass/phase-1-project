@@ -2,10 +2,11 @@ let choices
 let correctChoices
 let correctChoice
 let difficulty
+let dragged
 let possible_breweries = document.querySelector('#possible_breweries')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
-let info_section = document.querySelector('#info_section')
+let info_section = document.querySelector('.info_section')
 
 
 function resetAllChoices() {
@@ -35,6 +36,21 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Pick a difficulty!')
         }
     })
+    info_section.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    })
+    info_section.addEventListener("drop", (e) => {
+        e.preventDefault()
+
+////////////////////make this below into a seperate function ////////////////////////
+
+        let card = document.createElement('card')
+        let h4 = document.createElement('h4')
+        h4.innerText = `Name: ` + dragged.name
+        card.appendChild(h4)
+        info_section.appendChild(card)
+    })
+
 })
 
 function gatherPossibleWrongChoices(difficulty) {
@@ -91,10 +107,9 @@ function populateAllPossibleChoices(choice) {
     p.draggable = true
 
     p.addEventListener('dragstart', (e) => {
-        console.log(e)
+        dragged = choice
+        console.log(dragged)
     })
-
-
     // p.addEventListener('click', () => {
     //     if (name === correctChoice.name) {
     //         alert('YOU ARE A BEER SNOB!')

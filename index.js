@@ -1,6 +1,6 @@
-let choices = []
+let choices
 let ready = false
-let correctChoices = []
+let correctChoices
 let difficulty
 // let correctChoice = correctChoices[correctChoices.length - 2]
 
@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let select_difficulty = document.querySelector('select')
     select_difficulty.addEventListener('change', () => {
         difficulty = select_difficulty.value
-        choices = gatherPossibleWrongChoices(difficulty)
+        gatherPossibleWrongChoices(difficulty)
     })
 })
 
 
+
 function gatherPossibleWrongChoices(difficulty) {
-    let choices = []
     let i = 0
     while(i < (difficulty-1)) {
         let x = Math.floor(Math.random() * 8170)
@@ -29,7 +29,6 @@ function gatherPossibleWrongChoices(difficulty) {
         .then(data => choices.push(data[0]))
         i++
     }
-    return choices
 }
 
 
@@ -40,8 +39,9 @@ function gatherPossibleWrongChoices(difficulty) {
 
 document.addEventListener('DOMContentLoaded', () => {
     let form = document.querySelector('form')
-    
-    let submit = document.querySelector('#submitter')
+    correctChoices = []
+    choices = []
+    // let submit = document.querySelector('#submitter')
     form.addEventListener('submit', (e) => {
         e.preventDefault()
         let city = e.target['city'].value
@@ -49,14 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         grabCorrectAnswerBrewery(city, state)
         
-        let possible_breweries = document.querySelector('#possible_breweries')
-        possible_breweries.innerText = ''
+        // let possible_breweries = document.querySelector('#possible_breweries')
+        // possible_breweries.innerText = ''
         
-        if (ready === true && e.submitter === submit) {
-            choices = suffleChoices(choices)
-            choices.forEach(choice => populatePossibleChoices(choice))
-        }
-        choices = gatherPossibleWrongChoices(difficulty)
+        // if (ready === true && e.submitter === submit) {
+        //     choices = suffleChoices(choices)
+        //     choices.forEach(choice => populatePossibleChoices(choice))
+        // }
+        // choices = gatherPossibleWrongChoices(difficulty)
     })
 })
 
@@ -72,14 +72,27 @@ function grabCorrectAnswerBrewery(city, state) {
         if (len === 0) {
             alert('There are no breweries in this city! Try again')
         }
-        let x = Math.floor(Math.random() * len)
-        fetch(`https://api.openbrewerydb.org/breweries?by_state=${state}&by_city=${city}&page=${x}&per_page=1`)
-        .then(resp => resp.json())
-        .then(data => {
-            correctChoices.push(data[0])
-            choices.push(data[0])})
+        correctChoices.push(data)
+        let correctChoice = randomCorrectBrewery(correctChoices, len)
+        
+        
+
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     correctChoices.push(data[0])
+        //     choices.push(data[0])})
         })   
     } 
+
+function randomCorrectBrewery (correctChoices, len) {
+    let x = Math.floor(Math.random() * len)
+    console.log(correctChoices[0][x])
+    return correctChoices[x]
+}
+
+
+
+
 
 
 function suffleChoices(choices) {

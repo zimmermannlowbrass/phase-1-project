@@ -41,14 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     info_section.addEventListener("drop", (e) => {
         e.preventDefault()
-
-////////////////////make this below into a seperate function ////////////////////////
-
-        let card = document.createElement('card')
-        let h4 = document.createElement('h4')
-        h4.innerText = `Name: ` + dragged.name
-        card.appendChild(h4)
-        info_section.appendChild(card)
+        populateBreweryInfo(dragged)
     })
 
 })
@@ -110,12 +103,20 @@ function populateAllPossibleChoices(choice) {
         dragged = choice
         console.log(dragged)
     })
-    // p.addEventListener('click', () => {
-    //     if (name === correctChoice.name) {
-    //         alert('YOU ARE A BEER SNOB!')
-    //     } else {
-    //         alert('try again :(')
-    //     }
-    // })
+    p.addEventListener('click', () => {
+        if (name === correctChoice.name) {
+            alert('YOU ARE A BEER SNOB!')
+        } else {
+            alert('try again :(')
+        }
+    })
     possible_breweries.appendChild(p)
+}
+
+function populateBreweryInfo(dragged) {
+    let card = document.createElement('card')
+    let h4 = document.createElement('h4')
+    h4.innerText = `Name: ` + dragged.name
+    card.appendChild(h4)
+    info_section.appendChild(card)
 }

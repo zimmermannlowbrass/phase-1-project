@@ -3,6 +3,8 @@ let correctChoices
 let correctChoice
 let difficulty
 let dragged
+
+
 let possible_breweries = document.querySelector('#possible_breweries')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     select_difficulty.addEventListener('change', () => {
         resetAllChoices()
         difficulty = select_difficulty.value
-        gatherPossibleWrongChoices(difficulty)
+        gatherPossibleChoices(difficulty)
     })
     form.addEventListener('submit', (e) => {
         if (difficulty){
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-function gatherPossibleWrongChoices(difficulty) {
+function gatherPossibleChoices(difficulty) {
     let i = 0
     while(i < (difficulty-1)) {
         let x = Math.floor(Math.random() * 8170)
@@ -87,8 +89,6 @@ function shuffleAllPossibleChoices(choices) {
     return choices
 }
 
-
-
 function populateAllPossibleChoices(choice) {
     let name = choice.name
     let possible_breweries = document.querySelector('#possible_breweries')
@@ -111,7 +111,6 @@ function populateAllPossibleChoices(choice) {
     })
     possible_breweries.appendChild(p)
 }
-
 
 function populateBreweryInfo(dragged) {
     let card = document.createElement('card')

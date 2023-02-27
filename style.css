@@ -1,9 +1,29 @@
-/* #page_title {
-   justify-content: center; 
-   color: #dc2b2b;
+ #page_title {
+    display: flex;
+    justify-content: center;
 }
 
-.choice {
+/* .choice {
     color: indigo;
     border: #e04b52 solid 1px;
-} */
+}  */
+
+.beerphoto {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 600px;
+}
+
+#difficulty_title {
+    text-align: center;
+    display: contents;
+}
+
+.quiz_section {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}

@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resetAllChoices()
         difficulty = select_difficulty.value
         gatherPossibleWrongChoices(difficulty)
-        
     })
     form.addEventListener('submit', (e) => {
         if (difficulty){
@@ -92,31 +91,40 @@ function shuffleAllPossibleChoices(choices) {
 
 function populateAllPossibleChoices(choice) {
     let name = choice.name
-    //need to add a click event listener as well as drag/drop feature!
     let possible_breweries = document.querySelector('#possible_breweries')
     let p = document.createElement('p')
     p.className = 'choice'
     p.innerText = name
     p.draggable = true
-
-    p.addEventListener('dragstart', (e) => {
-        dragged = choice
-        console.log(dragged)
-    })
-    p.addEventListener('click', () => {
+    let checkMark = document.createElement('input')
+    checkMark.type = 'checkbox'
+    checkMark.addEventListener('click', () => {
         if (name === correctChoice.name) {
             alert('YOU ARE A BEER SNOB!')
         } else {
             alert('try again :(')
         }
     })
+    p.prepend(checkMark)
+    p.addEventListener('dragstart', () => {
+        dragged = choice
+    })
     possible_breweries.appendChild(p)
 }
 
+
 function populateBreweryInfo(dragged) {
     let card = document.createElement('card')
-    let h4 = document.createElement('h4')
-    h4.innerText = `Name: ` + dragged.name
-    card.appendChild(h4)
+    let p = document.createElement('p')
+    p.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.city + `, ` + dragged.state + `\n` + `Website: ` + dragged.website_url
+    card.appendChild(p)
     info_section.appendChild(card)
 }
+
+
+//to do--
+//clear choices after one has been slected
+//ofer to 'try again'?
+//make a scorecard of the correct answers
+//better flushout the info provided of the breweries
+//add css everywhere

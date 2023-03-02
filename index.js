@@ -9,7 +9,7 @@ let possible_breweries = document.querySelector('#possible_breweries')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
 let info_section = document.querySelector('.info_section')
-let drop_site = document.querySelector('#map_of_brewery')
+let map_of_brewery = document.querySelector('iframe')
 
 
 function resetAllChoices() {
@@ -117,7 +117,11 @@ function populateBreweryInfo(dragged) {
     info_section.removeChild(info_section.lastChild)
     let card = document.createElement('card')
     let h6 = document.createElement('h6')
-    h6.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.city + `, ` + dragged.state + `\n` + `Website: ` + dragged.website_url
+    h6.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.street + ', ' + dragged.city + `, ` + dragged.state + '\n'
+    let a = document.createElement('a')
+    a.innerText = `Website: ` + dragged.website_url
+    a.href = dragged.website_url
+    h6.appendChild(a)
     card.appendChild(h6)
     info_section.appendChild(card)
 }

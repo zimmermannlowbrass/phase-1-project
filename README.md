@@ -38,7 +38,9 @@ https://www.openbrewerydb.org/documentation
 //there are 409 pages available
 
 Notes:
-3 Event Listeners:
+3 Event Listeners Used:
 -submit brewery search (form)
+
 -vote for correct brewery (click)
+
 -drag favorite brewery over to a section of learn more(drag/drop)

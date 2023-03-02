@@ -129,8 +129,8 @@ function populateBreweryInfo(dragged) {
 
 //to do--
 //////change the drop site to be the iframe bar and populate the location link on google
-//clear choices after one has been slected
 //ofer to 'try again'?
 //make a scorecard of the correct answers
-//better flushout the info provided of the breweries
+//better flushout the info provided of the breweries!
+
 //add css everywhere

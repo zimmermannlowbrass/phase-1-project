@@ -1,13 +1,9 @@
 body {
-    background-color: rgb(56, 53, 15);
+    background-color: rgb(208, 202, 118);
   }
   
  
- 
- #page_title {
-    display: flex;
-    justify-content: center;
-}
+
 
 /* .choice {
     color: indigo;
@@ -23,10 +19,6 @@ body {
     width: 600px;
 }
 
-#difficulty_title {
-    text-align: center;
-    display: contents;
-}
 
 /* .quiz_section {
     margin: auto;

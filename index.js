@@ -9,6 +9,7 @@ let possible_breweries = document.querySelector('#possible_breweries')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
 let info_section = document.querySelector('.info_section')
+let drop_site = document.querySelector('#map_of_brewery')
 
 
 function resetAllChoices() {
@@ -113,10 +114,11 @@ function populateAllPossibleChoices(choice) {
 }
 
 function populateBreweryInfo(dragged) {
+    info_section.removeChild(info_section.lastChild)
     let card = document.createElement('card')
-    let p = document.createElement('p')
-    p.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.city + `, ` + dragged.state + `\n` + `Website: ` + dragged.website_url
-    card.appendChild(p)
+    let h6 = document.createElement('h6')
+    h6.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.city + `, ` + dragged.state + `\n` + `Website: ` + dragged.website_url
+    card.appendChild(h6)
     info_section.appendChild(card)
 }
 

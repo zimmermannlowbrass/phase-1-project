@@ -12,6 +12,7 @@ let form = document.querySelector('form')
 let info_section = document.querySelector('.info_section')
 let map_of_brewery = document.querySelector('iframe')
 let scoreboard = document.querySelector('#score')
+let play_again_prompt = document.querySelector('#play_again_prompt')
 
 
 function resetAllChoices() {
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         if (difficulty){
             possible_breweries.innerText = ''
+            play_again_prompt.innerText = ''
             let city = e.target['city'].value
             let state = e.target['state'].value
             grabCorrectAnswerBrewery(city, state)
@@ -109,6 +111,11 @@ function populateAllPossibleChoices(choice) {
             score -= 1
             scoreboard.innerText = score
             alert('wrong answer. play again?')
+        }
+        if (!play_again_prompt.hasChildNodes()) {
+            let i = document.createElement('i')
+            i.innerText = 'Want to play again? Select a difficulty and hit "Beer (Quiz) Me"!'
+            play_again_prompt.appendChild(i)
         }
     })
     p.prepend(checkMark)

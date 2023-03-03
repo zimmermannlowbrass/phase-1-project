@@ -2,6 +2,7 @@ let choices
 let correctChoices
 let correctChoice
 let difficulty
+let possiblePoints
 let dragged
 
 let score = 0
@@ -25,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     select_difficulty.addEventListener('change', () => {
         resetAllChoices()
         difficulty = select_difficulty.value
+        possiblePoints = parseInt(difficulty)
         gatherPossibleChoices(difficulty)
     })
     form.addEventListener('submit', (e) => {
@@ -104,11 +106,11 @@ function populateAllPossibleChoices(choice) {
     checkMark.type = 'checkbox'
     checkMark.addEventListener('click', () => {
         if (name === correctChoice.name) {
-            score += 1
+            score = possiblePoints + score
             scoreboard.innerText = score
             alert('YOU ARE A BEER SNOB! Cheers! Play again?')
         } else {
-            score -= 1
+            score -= 5
             scoreboard.innerText = score
             alert('wrong answer. play again?')
         }
@@ -150,3 +152,7 @@ function populateBreweryInfo(dragged) {
 
 
 //find a way to reset the info section
+
+
+
+///MAKE A WAY TO HAVE A DIFFERENT DIFFICULTY BASED ON THE NUMBER OF POSSIBLE OPTIONS////

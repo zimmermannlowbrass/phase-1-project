@@ -2,13 +2,25 @@ body {
     background-color: rgb(208, 202, 118);
   }
   
- 
+#page_title {
+    font-size: 72px;
+    margin-bottom: 0pt;
+}
+
+#description {
+    margin-top: 0pt;
+}
 
 
-/* .choice {
-    color: indigo;
-    border: #e04b52 solid 1px;
-}  */
+ .score {
+    font-family:'Franklin Gothic Medium';
+    font-weight: bolder;
+    font-size: 28px;
+    color: black;
+    outline-style: solid;
+    width: 100px;
+    display: inline-block;
+ }
 
 .beerphoto {
     display: flex;
@@ -19,12 +31,6 @@ body {
     width: 600px;
 }
 
-
-/* .quiz_section {
-    margin: auto;
-    width: 90%;
-    text-align: center;
-} */
 
 h6 {
     border: 1rem solid;

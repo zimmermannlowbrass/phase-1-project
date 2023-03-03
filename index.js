@@ -117,6 +117,7 @@ function populateAllPossibleChoices(choice) {
         if (!play_again_prompt.hasChildNodes()) {
             let i = document.createElement('i')
             i.innerText = 'Want to play again? Select a difficulty and hit "Beer (Quiz) Me"!'
+            i.style.color = 'red'
             play_again_prompt.appendChild(i)
         }
     })

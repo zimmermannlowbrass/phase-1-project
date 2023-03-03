@@ -116,6 +116,7 @@ function populateAllPossibleChoices(choice) {
 function populateBreweryInfo(dragged) {
     info_section.removeChild(info_section.lastChild)
     let card = document.createElement('card')
+    card.id = 'breweryInfo'
     let h6 = document.createElement('h6')
     h6.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.street + ', ' + dragged.city + `, ` + dragged.state + '\n'
     let a = document.createElement('a')
@@ -134,3 +135,6 @@ function populateBreweryInfo(dragged) {
 //better flushout the info provided of the breweries!
 
 //add css everywhere
+
+
+//find a way to reset the info section

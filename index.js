@@ -22,18 +22,24 @@ function resetAllChoices() {
     correctChoices = []
 }
 
+function resetPageInformation() {
+    possible_breweries.innerText = ''
+    play_again_prompt.innerText = ''
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
     select_difficulty.addEventListener('change', () => {
         resetAllChoices()
         difficulty = select_difficulty.value
         possiblePoints = parseInt(difficulty)
         gatherPossibleChoices(difficulty)
     })
+
     form.addEventListener('submit', (e) => {
         e.preventDefault()
         if (difficulty){
-            possible_breweries.innerText = ''
-            play_again_prompt.innerText = ''
+            resetPageInformation()
             let city = e.target['city'].value
             let state = e.target['state'].value
             grabCorrectAnswerBrewery(city, state)
@@ -44,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Pick a difficulty!')
         }
     })
+
     info_section.addEventListener("dragover", (e) => {
         e.preventDefault();
     })
@@ -51,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
         populateBreweryInfo(dragged)
     })
-
 })
 
 function gatherPossibleChoices(difficulty) {
@@ -108,10 +114,12 @@ function populateAllPossibleChoices(choice) {
         if (name === correctChoice.name) {
             score = possiblePoints + score
             scoreboard.innerText = score
+            checkMark.disabled = true
             alert('YOU ARE A BEER SNOB! Cheers! Play again?')
         } else {
             score -= 5
             scoreboard.innerText = score
+            checkMark.disabled = true
             alert('wrong answer. play again?')
         }
         if (!play_again_prompt.hasChildNodes()) {

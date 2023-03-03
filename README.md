@@ -1,10 +1,8 @@
-#     Hello! Welcome to my phase-1 project...
-   #  The Brewery Snob Quiz!
+ #  The Brewery Snob Quiz!
 
     **--Mission--**
 For this project, I will test a users knowledge of their local breweries. To do this, the user will have to pick the brewery from a list of breweries that matches their hometown. 
 
-    **--Process--**
 
     -Step 1: Pick a difficulty-
 
@@ -43,5 +41,7 @@ https://www.openbrewerydb.org/documentation
 3 Event Listeners Used :
 
 -submit brewery search (form)
+
 -vote for correct brewery (click)
+
 -drag favorite brewery over to a section of learn more(drag/drop)

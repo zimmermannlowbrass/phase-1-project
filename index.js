@@ -118,7 +118,7 @@ function populateBreweryInfo(dragged) {
     let card = document.createElement('card')
     card.id = 'breweryInfo'
     let h6 = document.createElement('h6')
-    h6.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.street + ', ' + dragged.city + `, ` + dragged.state + '\n'
+    h6.innerText = `Name: ` + dragged.name + `\n` + `Brewery type: ` + dragged.brewery_type + `\n` + `Location: ` + dragged.street + `, ` + dragged.city + `, ` + dragged.state + `, ` + dragged.postal_code + `\n`
     let a = document.createElement('a')
     a.innerText = `Website: ` + dragged.website_url
     a.href = dragged.website_url

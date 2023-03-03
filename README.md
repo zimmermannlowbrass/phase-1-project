@@ -44,4 +44,4 @@ https://www.openbrewerydb.org/documentation
 
 -vote for correct brewery (click)
 
--drag favorite brewery over to a section of learn more(drag/drop)
+-drag favorite brewery over to a section of learn more (drag/drop)

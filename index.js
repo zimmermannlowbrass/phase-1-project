@@ -4,12 +4,14 @@ let correctChoice
 let difficulty
 let dragged
 
+let score = 0
 
 let possible_breweries = document.querySelector('#possible_breweries')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
 let info_section = document.querySelector('.info_section')
 let map_of_brewery = document.querySelector('iframe')
+let scoreboard = document.querySelector('#score')
 
 
 function resetAllChoices() {
@@ -25,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
         gatherPossibleChoices(difficulty)
     })
     form.addEventListener('submit', (e) => {
+        e.preventDefault()
         if (difficulty){
-            e.preventDefault()
             possible_breweries.innerText = ''
             let city = e.target['city'].value
             let state = e.target['state'].value
             grabCorrectAnswerBrewery(city, state)
-            form.reset()
+            // form.reset()
             select_difficulty.selectedIndex = 0
             difficulty = null
         } else {
@@ -92,7 +94,6 @@ function shuffleAllPossibleChoices(choices) {
 
 function populateAllPossibleChoices(choice) {
     let name = choice.name
-    let possible_breweries = document.querySelector('#possible_breweries')
     let p = document.createElement('p')
     p.className = 'choice'
     p.innerText = name
@@ -101,9 +102,13 @@ function populateAllPossibleChoices(choice) {
     checkMark.type = 'checkbox'
     checkMark.addEventListener('click', () => {
         if (name === correctChoice.name) {
-            alert('YOU ARE A BEER SNOB!')
+            score += 1
+            scoreboard.innerText = score
+            alert('YOU ARE A BEER SNOB! Cheers! Play again?')
         } else {
-            alert('try again :(')
+            score -= 1
+            scoreboard.innerText = score
+            alert('wrong answer. play again?')
         }
     })
     p.prepend(checkMark)

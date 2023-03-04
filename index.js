@@ -116,17 +116,17 @@ function populateAllPossibleChoices(choice) {
             scoreboard.innerText = score
             checkMark.disabled = true
             alert('YOU ARE A BEER SNOB! Cheers! Play again?')
+            if (!play_again_prompt.hasChildNodes()) {
+                let i = document.createElement('i')
+                i.innerText = 'NICE JOB! Want to play again? Select a difficulty and hit "Beer (Quiz) Me"!'
+                i.style.color = 'red'
+                play_again_prompt.appendChild(i)
+            }
         } else {
             score -= 5
             scoreboard.innerText = score
             checkMark.disabled = true
             alert('wrong answer. play again?')
-        }
-        if (!play_again_prompt.hasChildNodes()) {
-            let i = document.createElement('i')
-            i.innerText = 'Want to play again? Select a difficulty and hit "Beer (Quiz) Me"!'
-            i.style.color = 'red'
-            play_again_prompt.appendChild(i)
         }
     })
     p.prepend(checkMark)
@@ -152,16 +152,9 @@ function populateBreweryInfo(dragged) {
 
 
 //to do--
-//////change the drop site to be the iframe bar and populate the location link on google
-//ofer to 'try again'?
-//make a scorecard of the correct answers
 //better flushout the info provided of the breweries!
 
-//add css everywhere
-
-
-//find a way to reset the info section
+//find a way to reset the info section?
 
 
 
-///MAKE A WAY TO HAVE A DIFFERENT DIFFICULTY BASED ON THE NUMBER OF POSSIBLE OPTIONS////

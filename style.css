@@ -5,13 +5,20 @@ body {
 #page_title {
     font-size: 72px;
     margin-bottom: 0pt;
+    margin-top: 0pt;
 }
 
 #description {
     margin-top: 0pt;
 }
+/* little beer images near the bottom */
+#beer_image {
+    height: 30px;
+    width: 50px;
+    background: none;
+}
 
-
+/* scoreboard */
  .score {
     font-family:'Franklin Gothic Medium';
     font-weight: bolder;
@@ -23,6 +30,7 @@ body {
     display: inline-block;
  }
 
+ /* top beer photo */
 .beerphoto {
     display: flex;
     justify-content: center;
@@ -32,8 +40,17 @@ body {
     width: 600px;
 }
 
+.info_section {
+    border: 1rem solid;
+    border-color: rgb(87, 84, 52);
+    max-width: max-content;
+    display: inline-block;
+}
 
+/* dropped info section for selected brewery */
 h6 {
     border: 1rem solid;
-    border-color: rgb(78, 71, 12);
+    border-color: rgb(87, 84, 52);
+    max-width: max-content;
+    display: inline-block;
 }

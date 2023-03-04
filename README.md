@@ -1,19 +1,19 @@
  #  The Brewery Snob Quiz!
 
-    **--Mission--**
-For this project, I will test a users knowledge of their local breweries. To do this, the user will have to pick the brewery from a list of breweries that matches their hometown. 
+    # Mission
+*For this project, I will test the users knowledge the breweries in their hometown. The user will be given a number of breweries names, but only one is from their hometown. Guess the correct brewery to gain points!*
 
 
     -Step 1: Pick a difficulty-
 
-*First, a user must choose a difficulty. There are three difficulty options (easy, medium, and hard).*
+**First, a user must choose a difficulty. There are three difficulty options (easy, medium, and hard).**
 
 At the time, the JS will fetch the given 'diffculty-minus-one' number of breweries from the API. The easy difficulty will populate 4 choices; the medium difficulty will populate 9 choices; the hard difficulty will populate 19 chocies. These incorrect choices will be saved in an array of 'choices'.
 
 
     -Step 2: Enter your hometown-
 
-*Next, a user will type in their hometown city and state.*
+**Next, a user will type in their hometown city and state.**
 
 The JS will fetch all of the breweries in the provided city/state, randomly pick a 'correct choice' from 'correct choices', and finally push the 'correct choice' to 'choices'. If there are no breweries in the city/state provided (len of fetched cities is zero), an alert will be triggered.
 
@@ -24,13 +24,16 @@ Before population, and to prevent the 'correct choice' from easily being found a
 
     -Step 3: Take the quiz-
 
-*Lastly, a user will choose the correct brewery from your hometown.*
+**Lastly, a user will choose the correct brewery from your hometown.**
 
 From the populated options, the user will click the checkmark box next to the 'correct choice' of 'choices'. If the 'correct choice' is selected, the page will be alerted with a message declaring the user as a "BEER SNOB". If the another chocie is selected, a sad alert will deliver the message of failure and invite the user to "try again :( "
 
 
     -BONUS: Discover More Brewery Information-
 
+**Learn more about any brewery**
+
+User may drag any brewery option provided from the selection section over to the "learn more" section. When the user drops the brewery option, the information for the brewery (name, address, brewery type, website URL) will all be populated in the bottom section. If the user decides to learn more about a different brewery, they may feel free to drag over a new one. Upon dropping, the old brewery information will be replaced by the new dragged option.
 
 
 

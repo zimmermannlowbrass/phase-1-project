@@ -8,6 +8,7 @@ let dragged
 let score = 0
 
 let possible_breweries = document.querySelector('#possible_breweries')
+let ranking = document.querySelector('#ranking')
 let select_difficulty = document.querySelector('select')
 let form = document.querySelector('form')
 let info_section = document.querySelector('.info_section')
@@ -28,7 +29,6 @@ function resetPageInformation() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
     select_difficulty.addEventListener('change', () => {
         resetAllChoices()
         difficulty = select_difficulty.value
@@ -106,7 +106,7 @@ function populateAllPossibleChoices(choice) {
     let name = choice.name
     let p = document.createElement('p')
     p.className = 'choice'
-    p.innerText = name
+    p.innerText = name 
     p.draggable = true
     let checkMark = document.createElement('input')
     checkMark.type = 'checkbox'
@@ -115,22 +115,22 @@ function populateAllPossibleChoices(choice) {
             score = possiblePoints + score
             scoreboard.innerText = score
             checkMark.disabled = true
-            if (score < 100) {
-                alert('NICE JOB! Want to play again?')
-            } else {
-                alert('YOU!!! ARE!!! A!!! BEER!!! SNOB!!!')
-            }
+            changeRanking(score)
+            p.innerText += ` - CORRECT!!`
+            p.style.color = 'green'
             if (!play_again_prompt.hasChildNodes()) {
                 let i = document.createElement('i')
                 i.innerText = 'NICE JOB! Want to play again? Select a difficulty and hit "Beer (Quiz) Me"!'
-                i.style.color = 'red'
+                i.style.color = 'blue'
                 play_again_prompt.appendChild(i)
             }
         } else {
             score -= 5
             scoreboard.innerText = score
             checkMark.disabled = true
-            alert('wrong answer. play again?')
+            changeRanking(score)
+            p.innerText += ` - INCORRECT.`
+            p.style.color = 'red'
         }
     })
     p.prepend(checkMark)
@@ -154,13 +154,39 @@ function populateBreweryInfo(dragged) {
     info_section.appendChild(card)
 }
 
+function changeRanking(score) {
+    switch(true) {
+        case score < 0:
+            ranking.innerText = `Ranking: designated driver`
+            break
+        case score < 5:
+            ranking.innerText = `Ranking: light-weight`
+            break
+        case score <= 10:
+            ranking.innerText = `Ranking: Beer Enthusiast`
+            break
+        case score <= 15:
+            ranking.innerText = `Ranking: Beer Geek`
+            break
+        case score <= 20:
+            ranking.innerText = `Ranking: Beer Aficionado`
+            break
+        case score <= 25:
+            ranking.innerText = `Ranking: Head Brewmaster`
+            break
+        case score >= 40:
+            ranking.innerText = `YOU ARE A BEER SNOB.`
+            ranking.style.color = 'RED'
+            alert('YOU ARE A BEER SNOB.')
+            break
+    }
+}
 
-//to do--
 
 
-//Finish up point system of getting to 100
-//populate a message when the user reaches 100 of congrats
+
 
 //label all functions better with side notes for clarity
 
+//better label names
 

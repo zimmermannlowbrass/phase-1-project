@@ -26,7 +26,9 @@ Before population, and to prevent the 'correct choice' from easily being found a
 
 **Lastly, a user will choose the correct brewery from your hometown.**
 
-From the populated options, the user will click the checkmark box next to the 'correct choice' of 'choices'. If the 'correct choice' is selected, the page will be alerted with a message declaring the user as a "BEER SNOB". If the another chocie is selected, a sad alert will deliver the message of failure and invite the user to "try again :( "
+From the populated options, the user will click the checkmark box next to the 'correct choice' of 'choices'. If the 'correct choice' is selected, the page will be alerted with a message similar to 'you are correct'. If the another chocie is selected, a sad alert will deliver the message of failure and invite the user to "try again :( "
+
+The user's goal will be to reach 100 points. At which point, they will be declared an official 'BEER SNOB'.
 
 
     -BONUS: Discover More Brewery Information-
@@ -38,10 +40,22 @@ User may drag any brewery option provided from the selection section over to the
 
 
 
-SOURCE :
+    -API SOURCE and NOTES-
 https://www.openbrewerydb.org/documentation
 
-3 Event Listeners Used :
+
+The "openbrewerydb" API that I decided to use was a bittersweet choice. On the one hand, I sincerely appreciated the niche data set. Breweries are becoming more of a fad, quickly surpassing bars due to their family friendly/local/creative vibes. The database much needed information including brewery type, location, and website URL. There were data points that I chose not to use: longitudinal/latitudinal locations as well as phone number.
+
+**API Drawbacks:**
+-One of the big drawbacks of my API was how the data would be populated on a given page. The set limit of 50 breweries per page made populating say all the breweries in Denver, Colorado difficult (there are more than 50 breweries in Denver), ultimately requiring more than one page. 
+
+-The API came with a 'random' feature. However, you can only populate one random brewery at a time. This also proved difficult for grabbing say 4 random breweries. Using the 'random' feature would not intuitively fetch a new random brewery upon each fetch call. Ultimetely, I chose not to impleement the 'random' feature.
+
+-Every so often, the city of location data attribute for a brewery could be ambiguious. Take the famous Other Half Brewing Company: this brewery would only be populated if the user searches for breweries in 'Brooklyn' and not if a user searches for breweries in 'New York City".
+
+
+
+    -3 Event Listeners Used-
 
 -submit brewery search (form)
 

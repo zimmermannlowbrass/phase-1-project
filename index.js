@@ -115,7 +115,11 @@ function populateAllPossibleChoices(choice) {
             score = possiblePoints + score
             scoreboard.innerText = score
             checkMark.disabled = true
-            alert('YOU ARE A BEER SNOB! Cheers! Play again?')
+            if (score < 100) {
+                alert('NICE JOB! Want to play again?')
+            } else {
+                alert('YOU!!! ARE!!! A!!! BEER!!! SNOB!!!')
+            }
             if (!play_again_prompt.hasChildNodes()) {
                 let i = document.createElement('i')
                 i.innerText = 'NICE JOB! Want to play again? Select a difficulty and hit "Beer (Quiz) Me"!'
@@ -152,9 +156,11 @@ function populateBreweryInfo(dragged) {
 
 
 //to do--
-//better flushout the info provided of the breweries!
 
-//find a way to reset the info section?
 
+//Finish up point system of getting to 100
+//populate a message when the user reaches 100 of congrats
+
+//label all functions better with side notes for clarity
 
 

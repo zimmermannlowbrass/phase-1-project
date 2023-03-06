@@ -1,12 +1,13 @@
+//variables
 let choices
 let correctChoices
 let correctChoice
 let difficulty
 let possiblePoints
 let dragged
-
 let score = 0
 
+//grabbed sections of html
 let possible_breweries = document.querySelector('#possible_breweries')
 let ranking = document.querySelector('#ranking')
 let select_difficulty = document.querySelector('select')
@@ -16,26 +17,28 @@ let map_of_brewery = document.querySelector('iframe')
 let scoreboard = document.querySelector('#score')
 let play_again_prompt = document.querySelector('#play_again_prompt')
 
-
+//reset fetched choices
 function resetAllChoices() {
     choices = []
     correctChoice = null
     correctChoices = []
 }
-
+//reset page
 function resetPageInformation() {
     possible_breweries.innerText = ''
     play_again_prompt.innerText = ''
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
+    //select difficulty
     select_difficulty.addEventListener('change', () => {
         resetAllChoices()
         difficulty = select_difficulty.value
         possiblePoints = parseInt(difficulty)
         gatherPossibleChoices(difficulty)
     })
-
+    //submit form
     form.addEventListener('submit', (e) => {
         e.preventDefault()
         if (difficulty){
@@ -43,23 +46,26 @@ document.addEventListener('DOMContentLoaded', () => {
             let city = e.target['city'].value
             let state = e.target['state'].value
             grabCorrectAnswerBrewery(city, state)
-            // form.reset()
+            //reset difficulty to ensure new choices
             select_difficulty.selectedIndex = 0
             difficulty = null
         } else {
             alert('Pick a difficulty!')
         }
     })
-
+    //allow dragover
     info_section.addEventListener("dragover", (e) => {
         e.preventDefault();
     })
+    //provide brewery info
     info_section.addEventListener("drop", (e) => {
         e.preventDefault()
         populateBreweryInfo(dragged)
     })
 })
 
+
+//fetch possible choices that are incorrect
 function gatherPossibleChoices(difficulty) {
     let i = 0
     while(i < (difficulty-1)) {
@@ -71,6 +77,7 @@ function gatherPossibleChoices(difficulty) {
     }
 }
 
+//fetch possible choices that are correct
 function grabCorrectAnswerBrewery(city, state) {
     fetch(`https://api.openbrewerydb.org/breweries?by_type=micro&by_state=${state}&by_city=${city}&per_page=50`)
     .then(resp => resp.json())
@@ -83,15 +90,20 @@ function grabCorrectAnswerBrewery(city, state) {
         correctChoice = randomCorrectBrewery(correctChoices, len)
         choices.push(correctChoice)
         choices = shuffleAllPossibleChoices(choices)
+//      vvv    forEach used here   vvv
         choices.forEach(choice => populateAllPossibleChoices(choice))
+//      ^^^    forEach used here   ^^^
+
         })   
     } 
-
+//randomly grab one correct choice
 function randomCorrectBrewery (correctChoices, len) {
     let x = Math.floor(Math.random() * len)
     return correctChoices[0][x]
 }
 
+//randomly shuffle all choices so correct choice is not at the end
+// *Fisher-Yates Shuffle*
 function shuffleAllPossibleChoices(choices) {
     for (let i = choices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -102,6 +114,7 @@ function shuffleAllPossibleChoices(choices) {
     return choices
 }
 
+//populate all choices to the document
 function populateAllPossibleChoices(choice) {
     let name = choice.name
     let p = document.createElement('p')
@@ -140,6 +153,7 @@ function populateAllPossibleChoices(choice) {
     possible_breweries.appendChild(p)
 }
 
+//populate information of dragged brewery name
 function populateBreweryInfo(dragged) {
     info_section.removeChild(info_section.lastChild)
     let card = document.createElement('card')
@@ -154,6 +168,7 @@ function populateBreweryInfo(dragged) {
     info_section.appendChild(card)
 }
 
+//determine the rank of user
 function changeRanking(score) {
     switch(true) {
         case score < 0:
@@ -185,8 +200,7 @@ function changeRanking(score) {
 
 
 
+//check for BEST label names of functions
 
-//label all functions better with side notes for clarity
-
-//better label names
+//better describe the rules of the game on the html page
 

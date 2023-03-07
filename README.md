@@ -52,13 +52,3 @@ The "openbrewerydb" API that I decided to use was a bittersweet choice. On the o
 -The API came with a 'random' feature. However, you can only populate one random brewery at a time. This also proved difficult for grabbing say 4 random breweries. Using the 'random' feature would not intuitively fetch a new random brewery upon each fetch call. Ultimetely, I chose not to impleement the 'random' feature.
 
 -Every so often, the city of location data attribute for a brewery could be ambiguious. Take the famous Other Half Brewing Company: this brewery would only be populated if the user searches for breweries in 'Brooklyn' and not if a user searches for breweries in 'New York City".
-
-
-
-    -3 Event Listeners Used-
-
--submit brewery search (form)
-
--vote for correct brewery (click)
-
--drag favorite brewery over to a section of learn more (drag/drop)

@@ -41,7 +41,7 @@ User may drag any brewery option provided from the selection section over to the
 
 
     -API SOURCE and NOTES-
-https://www.openbrewerydb.org/documentation
+[Brewery API](https://www.openbrewerydb.org/documentation)
 
 
 The "openbrewerydb" API that I decided to use was a bittersweet choice. On the one hand, I sincerely appreciated the niche data set. Breweries are becoming more of a fad, quickly surpassing bars due to their family friendly/local/creative vibes. The database much needed information including brewery type, location, and website URL. There were data points that I chose not to use: longitudinal/latitudinal locations as well as phone number.

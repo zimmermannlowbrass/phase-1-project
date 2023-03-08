@@ -79,8 +79,6 @@ function grabCorrectAnswerBrewery(city, state) {
         choices.push(correctChoice)
         choices = shuffleAllPossibleChoices(choices)
         choices.forEach(choice => populateAllPossibleChoices(choice))
-
-
         })   
     } 
 

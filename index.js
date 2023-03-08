@@ -153,29 +153,35 @@ function changeRanking(score) {
     switch(true) {
         case score < 0:
             ranking.innerText = `Ranking: designated driver`
+            ranking.style.color = 'BLACK'
             break
         case score < 5:
             ranking.innerText = `Ranking: light-weight`
+            ranking.style.color = 'BLACK'
             break
         case score <= 10:
             ranking.innerText = `Ranking: Beer Enthusiast`
+            ranking.style.color = 'GREEN'
             break
         case score <= 15:
             ranking.innerText = `Ranking: Beer Geek`
+            ranking.style.color = 'GREEN'
             break
         case score <= 20:
             ranking.innerText = `Ranking: Beer Aficionado`
+            ranking.style.color = 'GREEN'
             break
         case score <= 25:
             ranking.innerText = `Ranking: Beer Connoisseur`
+            ranking.style.color = 'YELLOW'
             break
         case score <= 30:
             ranking.innerText = `Ranking: HEAD BREWMASTER`
+            ranking.style.color = 'ORANGE'
             break
         case score >= 40:
             ranking.innerText = `YOU ARE A BEER SNOB`
             ranking.style.color = 'RED'
-            ranking.style.textDecoration = 'underline'
             alert('YOU ARE A BEER SNOB')
             break
     }
